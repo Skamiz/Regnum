@@ -505,8 +505,8 @@ minetest.register_entity("tutorial:legendballadmin", {
 	velocity = 5,
 	light_source = 12,
 	on_step = function(self, dtime)
-			local pos = self.object:getpos()
-			if minetest.env:get_node(self.object:getpos()).name ~= "air" then
+			local pos = self.object:get_pos()
+			if minetest.env:get_node(self.object:get_pos()).name ~= "air" then
 				self.hit_node(self, pos, node)
 				self.object:remove()
 				return
@@ -523,10 +523,10 @@ minetest.register_entity("tutorial:legendballadmin", {
 	hit_player = function(self, player)
 		local hp = player:get_hp()
 		player:set_hp(0)
-		local s = player:getpos()
+		local s = player:get_pos()
 		local p = player:get_look_dir()
 		local vec = {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}
-		local pos = player:getpos()
+		local pos = player:get_pos()
 		for dx=0,1 do
 			for dy=0,1 do
 				for dz=0,1 do
@@ -559,7 +559,7 @@ minetest.register_tool("tutorial:legendball_admin", {
 	on_use = function(itemstack, placer, pointed_thing)
 			local dir = placer:get_look_dir();
 			local inv = placer:get_inventory()
-			local playerpos = placer:getpos();
+			local playerpos = placer:get_pos();
 			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_admin")
 			local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 			if not minetest.is_creative_enabled(placer:get_player_name()) then
@@ -597,7 +597,7 @@ minetest.register_tool("tutorial:legendstick_admin", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendballadmin")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -611,7 +611,7 @@ minetest.register_tool("tutorial:legendstick9", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_8_8_8")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -626,7 +626,7 @@ minetest.register_tool("tutorial:legendstick8", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_7_7_7")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -641,7 +641,7 @@ minetest.register_tool("tutorial:legendstick7", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_6_6_6")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -656,7 +656,7 @@ minetest.register_tool("tutorial:legendstick6", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_5_5_6")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -671,7 +671,7 @@ minetest.register_tool("tutorial:legendstick5", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_4_4_5")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -686,7 +686,7 @@ minetest.register_tool("tutorial:legendstick4", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_3_4_4")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -701,7 +701,7 @@ minetest.register_tool("tutorial:legendstick3", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_2_3_3")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -716,7 +716,7 @@ minetest.register_tool("tutorial:legendstick2", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_2_2_2")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -731,7 +731,7 @@ minetest.register_tool("tutorial:legendstick1", {
 	on_use = function(itemstack, placer, pointed_thing)
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_1_1_1")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
@@ -1763,7 +1763,7 @@ minetest.register_globalstep(function(dtime)
 			end
 			if (oldpos[player:get_player_name()] ~= nil) then
 				local playername = player:get_player_name()
-				local pos = player:getpos()
+				local pos = player:get_pos()
                 local player_inv = player:get_inventory()
                 player_inv:set_size("mov", 1)
                 player_inv:set_size("mov2", 1)
@@ -1789,7 +1789,7 @@ minetest.register_globalstep(function(dtime)
                     player_inv:add_item("medall", "tutorial:medallion")
                 end
             end
-            oldpos[player:get_player_name()] = player:getpos()
+            oldpos[player:get_player_name()] = player:get_pos()
 		end
 		timer = 0
 	end
@@ -5504,7 +5504,7 @@ for i = 0, 127 do
         elseif i < 128 then
             l = 20
         end
-	    local pos = self.object:getpos()
+	    local pos = self.object:get_pos()
 	    local node = minetest.get_node(pos)
 	    if self.timer > 0.08 then
 		    local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, l)
@@ -5671,7 +5671,7 @@ for i = 0, 127 do
         elseif i < 128 then
             l = 20
         end
-	    local pos = self.object:getpos()
+	    local pos = self.object:get_pos()
 	    local node = minetest.get_node(pos)
 	    if self.timer > 0.08 then
 		    local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, l)
@@ -5805,7 +5805,7 @@ for _, m in pairs(guns) do
 		groups = {not_in_creative_inventory=1},
 	    on_use = function(itemstack, user, pointed_thing)
 		    local inv = user:get_inventory()
-		    local pos = user:getpos()
+		    local pos = user:get_pos()
 		    local dir = user:get_look_dir()
 		    local yaw = user:get_look_yaw()
 		    if pos and dir and yaw then
@@ -5832,7 +5832,7 @@ for _, m in pairs(guns) do
 		groups = {not_in_creative_inventory=1},
 	    on_use = function(itemstack, user, pointed_thing)
 		    local inv = user:get_inventory()
-		    local pos = user:getpos()
+		    local pos = user:get_pos()
 		    local dir = user:get_look_dir()
 		    local yaw = user:get_look_yaw()
 		    if pos and dir and yaw then
@@ -5860,7 +5860,7 @@ minetest.register_tool("tutorial:superlegendengun1", {
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
@@ -5887,7 +5887,7 @@ minetest.register_tool("tutorial:superlegendengun2", {
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
@@ -5914,7 +5914,7 @@ minetest.register_tool("tutorial:superlegendengun3", {
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
@@ -5941,7 +5941,7 @@ minetest.register_tool("tutorial:regnumgun1", {
     wield_image = "tutorial_regnumgun.png",
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
@@ -5968,7 +5968,7 @@ minetest.register_tool("tutorial:regnumgun2", {
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
@@ -5996,7 +5996,7 @@ minetest.register_tool("tutorial:regnumgun3", {
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
@@ -6024,7 +6024,7 @@ minetest.register_tool("tutorial:gun_admin1", {
     wield_image = "tutorial_admingun.png",
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
@@ -6051,7 +6051,7 @@ minetest.register_tool("tutorial:gun_admin2", {
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
@@ -6079,7 +6079,7 @@ minetest.register_tool("tutorial:gun_admin3", {
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		local dir = user:get_look_dir()
 		local yaw = user:get_look_yaw()
 		if pos and dir and yaw then
