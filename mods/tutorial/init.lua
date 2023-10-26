@@ -125,7 +125,7 @@ minetest.register_craftitem("tutorial:spawn_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:mummy")
+			minetest.add_entity(pointed_thing.above,"mobs:mummy")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -506,13 +506,13 @@ minetest.register_entity("tutorial:legendballadmin", {
 	light_source = 12,
 	on_step = function(self, dtime)
 			local pos = self.object:get_pos()
-			if minetest.env:get_node(self.object:get_pos()).name ~= "air" then
+			if minetest.get_node(self.object:get_pos()).name ~= "air" then
 				self.hit_node(self, pos, node)
 				self.object:remove()
 				return
 			end
 			pos.y = pos.y-1
-			for _,player in pairs(minetest.env:get_objects_inside_radius(pos, 1)) do
+			for _,player in pairs(minetest.get_objects_inside_radius(pos, 1)) do
 				if player:is_player() then
 					self.hit_player(self, player)
 					self.object:remove()
@@ -531,9 +531,9 @@ minetest.register_entity("tutorial:legendballadmin", {
 			for dy=0,1 do
 				for dz=0,1 do
 					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(p).name
+					local n = minetest.get_node(p).name
 					if (n == "air") then
-						minetest.env:add_node(p, {name="tutorial:legend_thunderadmin"})
+						minetest.add_node(p, {name="tutorial:legend_thunderadmin"})
 					end
 				end
 			end
@@ -544,9 +544,9 @@ minetest.register_entity("tutorial:legendballadmin", {
 			for dy=-2,1 do
 				for dz=-1,1 do
 					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(p).name
+					local n = minetest.get_node(p).name
 					if (n == "air") then
-						minetest.env:add_node(p, {name="tutorial:legend_thunderadmin"})
+						minetest.add_node(p, {name="tutorial:legend_thunderadmin"})
 					end
 				end
 			end
@@ -560,7 +560,7 @@ minetest.register_tool("tutorial:legendball_admin", {
 			local dir = placer:get_look_dir();
 			local inv = placer:get_inventory()
 			local playerpos = placer:get_pos();
-			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_admin")
+			local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_admin")
 			local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 			if not minetest.is_creative_enabled(placer:get_player_name()) then
                 itemstack:take_item()
@@ -588,7 +588,7 @@ minetest.register_abm({
 	interval = 30,
 	chance = 1,
 	action = function(pos)
-		minetest.env:remove_node(pos)
+		minetest.remove_node(pos)
 	end,
 })
 minetest.register_tool("tutorial:legendstick_admin", {
@@ -598,7 +598,7 @@ minetest.register_tool("tutorial:legendstick_admin", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendballadmin")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendballadmin")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -612,7 +612,7 @@ minetest.register_tool("tutorial:legendstick9", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_8_8_8")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_8_8_8")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -627,7 +627,7 @@ minetest.register_tool("tutorial:legendstick8", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_7_7_7")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_7_7_7")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -642,7 +642,7 @@ minetest.register_tool("tutorial:legendstick7", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_6_6_6")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_6_6_6")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -657,7 +657,7 @@ minetest.register_tool("tutorial:legendstick6", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_5_5_6")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_5_5_6")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -672,7 +672,7 @@ minetest.register_tool("tutorial:legendstick5", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_4_4_5")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_4_4_5")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -687,7 +687,7 @@ minetest.register_tool("tutorial:legendstick4", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_3_4_4")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_3_4_4")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -702,7 +702,7 @@ minetest.register_tool("tutorial:legendstick3", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_2_3_3")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_2_3_3")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -717,7 +717,7 @@ minetest.register_tool("tutorial:legendstick2", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_2_2_2")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_2_2_2")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -732,7 +732,7 @@ minetest.register_tool("tutorial:legendstick1", {
         local dir = placer:get_look_dir();
 		local inv = placer:get_inventory()
 		local playerpos = placer:get_pos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_1_1_1")
+		local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_1_1_1")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)
 	    return itemstack
@@ -1167,7 +1167,7 @@ minetest.register_node("tutorial:bottle_crystal", {
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
     on_place = function(itemstack, placer, pointed_thing)
-        minetest.env:add_entity(pointed_thing.above, "experience:orb_cyan")
+        minetest.add_entity(pointed_thing.above, "experience:orb_cyan")
         if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
         return itemstack
     end,
