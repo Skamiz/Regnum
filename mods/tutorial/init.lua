@@ -46,8 +46,8 @@ minetest.register_on_chatcommand(function(name, command, params)
 	if (command == "killme" or (command == "kill" and can_access )) and minetest.settings:get_bool("enable_damage") then
 		if player then
 			local inv = player:get_inventory()
-			if inv:get_stack("armor", 1):get_name() == "3d_armor:helmet_admin"  
-			and inv:get_stack("armor", 2):get_name() == "3d_armor:chestplate_admin" 
+			if inv:get_stack("armor", 1):get_name() == "3d_armor:helmet_admin"
+			and inv:get_stack("armor", 2):get_name() == "3d_armor:chestplate_admin"
 			and inv:get_stack("armor", 3):get_name() == "3d_armor:leggings_admin"
 			and inv:get_stack("armor", 4):get_name() == "3d_armor:boots_admin"
 			and inv:get_stack("armor", 5):get_name() == "shields:shield_admin" then
@@ -107,7 +107,7 @@ backward.get_formspec = function(player, pos)
 		.."label[5,2.2;Bagkey lv.1-3]"
 		.."label[5,2.5;Wallplacer lv.1-4]"
 		.."label[5,2.8;Cookingkey lv.1-3]"
-	return formspec		
+	return formspec
 end
 
 minetest.register_craft({
@@ -562,8 +562,8 @@ minetest.register_tool("tutorial:legendball_admin", {
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_admin")
 			local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
-			if not minetest.setting_getbool("creative_mode") then 
-                itemstack:take_item() 
+			if not minetest.setting_getbool("creative_mode") then
+                itemstack:take_item()
             end
 			obj:setvelocity(vec)
 		return itemstack
@@ -795,7 +795,7 @@ troph.get_formspec = function(player, pos)
         .."listring[current_player;main]"
 		.."listring[current_player;trophcr]"
         .."label[3.65,2;Tears]"
-	return formspec		
+	return formspec
 end
 local trophys = {}
 trophys.get_formspec = function(player, pos)
@@ -998,7 +998,7 @@ trophys.get_formspec = function(player, pos)
         .."label[0,8.75;Cyan]"
         .."label[4,0;"..d.."/24]"
         player_inv:set_stack("trtr", 1 , "default:dirt "..d)
-	return formspec		
+	return formspec
 end
 minetest.register_craftitem("tutorial:big_dna_string", {
 	description = "Big DNA string",
@@ -1148,7 +1148,7 @@ treasures.get_formspec = function(player, pos)
         end
         player_inv:set_stack("tata", 1 , "default:dirt "..d)
 
-	return formspec		
+	return formspec
 end
 minetest.register_craftitem("tutorial:coin_cyan", {
     description = "Coin cyan (very rare)",
@@ -1249,7 +1249,7 @@ crafting7.get_formspec = function(player, pos)
         .."button[3,3;2,0.5;meda4;Yellow]"
         .."button[5,3;2,0.5;meda6;Cyan]"
         .."button[3,4;2,0.5;meda7;Gray]"
-	return formspec		
+	return formspec
 end
 local crafting8 = {}
 crafting8.get_formspec = function(player, pos)
@@ -1296,7 +1296,7 @@ crafting8.get_formspec = function(player, pos)
 	if time == 0 then
 		formspec = formspec .."button[1,2;2,0.5;cre2;crystalbottle]"
 	end
-	return formspec		
+	return formspec
 end
 local meda = {}
 meda.get_formspec = function(player, pos)
@@ -1389,7 +1389,7 @@ meda.get_formspec = function(player, pos)
         else
             formspec = formspec .."image[3,3;1,1;medallion_"..x.."_9.png]"
         end
-	return formspec		
+	return formspec
 end
 minetest.register_craftitem("tutorial:tortoise_schluessel", {
 	description = "Tortoisekey",
@@ -1506,7 +1506,7 @@ medallion.get_formspec = function(player, pos)
         formspec = formspec .."button[6.5,0;2,0.5;medrew;Reward]"
     end
     player_inv:set_stack("meme", 1 , "default:dirt "..p)
-	return formspec		
+	return formspec
 end
 local timer = 0
 local oldpos = {}
@@ -1613,16 +1613,16 @@ local mode_tools = {
 	{"tutorial:adminwallplacer_3","tutorial:adminwallplacer_4",""},
 	{"tutorial:adminwallplacer_4","tutorial:adminwallplacer_5",""},
 	{"tutorial:adminwallplacer_5","tutorial:adminwallplacer_1",""},
-	
-	
+
+
 	{"tutorial:superlegendengun1","tutorial:superlegendengun3",""},
 	{"tutorial:superlegendengun2","tutorial:superlegendengun1",""},
 	{"tutorial:superlegendengun3","tutorial:superlegendengun2",""},
-	
+
 	{"tutorial:regnumgun1","tutorial:regnumgun3",""},
 	{"tutorial:regnumgun2","tutorial:regnumgun1",""},
 	{"tutorial:regnumgun3","tutorial:regnumgun2",""},
-	
+
 	{"tutorial:gun_admin1","tutorial:gun_admin3",""},
 	{"tutorial:gun_admin2","tutorial:gun_admin1",""},
 	{"tutorial:gun_admin3","tutorial:gun_admin2",""},
@@ -1684,14 +1684,9 @@ minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(players) do
 		local keys = player:get_player_control()
 		local player_inv = player:get_inventory()
-		if keys["sneak"] == true then
-			
-			player:set_attribute("sneaking", "true")
-		else
-			player:set_attribute("sneaking", "false")
-		end
+		local player_meta = player:get_meta()
 		if keys["RMB"] == true then
-			if player:get_attribute("sneaking") == "true" and player:get_attribute("rightclick") == "false" then
+			if keys.sneaking and player:get_attribute("rightclick") == "false" then
 				local item = player:get_wielded_item():get_name()
 				local itemstack = player:get_wielded_item()
 				local kk = 0
@@ -1716,9 +1711,9 @@ minetest.register_globalstep(function(dtime)
 					end
 				end
 			end
-			player:set_attribute("rightclick", "true")
+			player_meta:set_string("rightclick", "true")
 		else
-			player:set_attribute("rightclick", "false")
+			player_meta:set_string("rightclick", "false")
 		end
 	end
 	if (timer >= 1) then
@@ -1921,8 +1916,8 @@ artifacts.get_formspec = function(player, pos)
         .."background[8,8.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		
-	return formspec		
+
+	return formspec
 end
 local crafting6 = {}
 crafting6.get_formspec = function(player, pos)
@@ -1952,7 +1947,7 @@ crafting6.get_formspec = function(player, pos)
         .."background[10,11.3.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-	return formspec		
+	return formspec
 end
 minetest.register_craftitem("tutorial:fox_schluessel", {
 	description = "Foxkey",
@@ -2086,8 +2081,8 @@ minetest.register_craftitem("tutorial:wallplacer1", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -2130,7 +2125,7 @@ minetest.register_craftitem("tutorial:wallplacer1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-3), z=pos.z+(j-2)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2172,7 +2167,7 @@ minetest.register_craftitem("tutorial:wallplacer1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x+(j-2), y=pos.y+(i-3), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2202,8 +2197,8 @@ minetest.register_craftitem("tutorial:wallplacer2_2", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -2246,7 +2241,7 @@ minetest.register_craftitem("tutorial:wallplacer2_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-5), z=pos.z+(j-3)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2288,7 +2283,7 @@ minetest.register_craftitem("tutorial:wallplacer2_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x+(j-3), y=pos.y+(i-5), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2318,8 +2313,8 @@ minetest.register_craftitem("tutorial:wallplacer2_1", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -2362,7 +2357,7 @@ minetest.register_craftitem("tutorial:wallplacer2_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-3), z=pos.z+(j-2)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2404,7 +2399,7 @@ minetest.register_craftitem("tutorial:wallplacer2_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x+(j-2), y=pos.y+(i-3), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2434,8 +2429,8 @@ minetest.register_craftitem("tutorial:wallplacer3_1", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -2478,7 +2473,7 @@ minetest.register_craftitem("tutorial:wallplacer3_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-3), z=pos.z+(j-2)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2520,7 +2515,7 @@ minetest.register_craftitem("tutorial:wallplacer3_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x+(j-2), y=pos.y+(i-3), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2550,8 +2545,8 @@ minetest.register_craftitem("tutorial:wallplacer3_2", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -2594,7 +2589,7 @@ minetest.register_craftitem("tutorial:wallplacer3_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-5), z=pos.z+(j-3)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2636,7 +2631,7 @@ minetest.register_craftitem("tutorial:wallplacer3_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x+(j-3), y=pos.y+(i-5), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2666,8 +2661,8 @@ minetest.register_craftitem("tutorial:wallplacer3_3", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -2710,7 +2705,7 @@ minetest.register_craftitem("tutorial:wallplacer3_3", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,7,1 do
-                            for j=1,7,1 do 
+                            for j=1,7,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-7), z=pos.z+(j-4)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2752,7 +2747,7 @@ minetest.register_craftitem("tutorial:wallplacer3_3", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,7,1 do
-                            for j=1,7,1 do 
+                            for j=1,7,1 do
                                 local name = minetest.get_node({x=pos.x+(j-4), y=pos.y+(i-7), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2782,8 +2777,8 @@ minetest.register_craftitem("tutorial:wallplacer4_1", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -2826,7 +2821,7 @@ minetest.register_craftitem("tutorial:wallplacer4_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-3), z=pos.z+(j-2)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2868,7 +2863,7 @@ minetest.register_craftitem("tutorial:wallplacer4_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x+(j-2), y=pos.y+(i-3), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2898,8 +2893,8 @@ minetest.register_craftitem("tutorial:wallplacer4_2", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -2942,7 +2937,7 @@ minetest.register_craftitem("tutorial:wallplacer4_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-5), z=pos.z+(j-3)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -2984,7 +2979,7 @@ minetest.register_craftitem("tutorial:wallplacer4_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x+(j-3), y=pos.y+(i-5), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3014,8 +3009,8 @@ minetest.register_craftitem("tutorial:wallplacer4_3", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3058,7 +3053,7 @@ minetest.register_craftitem("tutorial:wallplacer4_3", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,7,1 do
-                            for j=1,7,1 do 
+                            for j=1,7,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-7), z=pos.z+(j-4)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3100,7 +3095,7 @@ minetest.register_craftitem("tutorial:wallplacer4_3", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,7,1 do
-                            for j=1,7,1 do 
+                            for j=1,7,1 do
                                 local name = minetest.get_node({x=pos.x+(j-4), y=pos.y+(i-7), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3130,8 +3125,8 @@ minetest.register_craftitem("tutorial:wallplacer4_4", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3174,7 +3169,7 @@ minetest.register_craftitem("tutorial:wallplacer4_4", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,9,1 do
-                            for j=1,9,1 do 
+                            for j=1,9,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-9), z=pos.z+(j-5)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3216,7 +3211,7 @@ minetest.register_craftitem("tutorial:wallplacer4_4", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,9,1 do
-                            for j=1,9,1 do 
+                            for j=1,9,1 do
                                 local name = minetest.get_node({x=pos.x+(j-5), y=pos.y+(i-9), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3245,8 +3240,8 @@ minetest.register_craftitem("tutorial:wallplacer5_1", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3289,7 +3284,7 @@ minetest.register_craftitem("tutorial:wallplacer5_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-3), z=pos.z+(j-2)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3331,7 +3326,7 @@ minetest.register_craftitem("tutorial:wallplacer5_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x+(j-2), y=pos.y+(i-3), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3361,8 +3356,8 @@ minetest.register_craftitem("tutorial:wallplacer5_2", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3405,7 +3400,7 @@ minetest.register_craftitem("tutorial:wallplacer5_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-5), z=pos.z+(j-3)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3447,7 +3442,7 @@ minetest.register_craftitem("tutorial:wallplacer5_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x+(j-3), y=pos.y+(i-5), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3477,8 +3472,8 @@ minetest.register_craftitem("tutorial:wallplacer5_3", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3521,7 +3516,7 @@ minetest.register_craftitem("tutorial:wallplacer5_3", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,7,1 do
-                            for j=1,7,1 do 
+                            for j=1,7,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-7), z=pos.z+(j-4)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3563,7 +3558,7 @@ minetest.register_craftitem("tutorial:wallplacer5_3", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,7,1 do
-                            for j=1,7,1 do 
+                            for j=1,7,1 do
                                 local name = minetest.get_node({x=pos.x+(j-4), y=pos.y+(i-7), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3593,8 +3588,8 @@ minetest.register_craftitem("tutorial:wallplacer5_4", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3637,7 +3632,7 @@ minetest.register_craftitem("tutorial:wallplacer5_4", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,9,1 do
-                            for j=1,9,1 do 
+                            for j=1,9,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-9), z=pos.z+(j-5)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3679,7 +3674,7 @@ minetest.register_craftitem("tutorial:wallplacer5_4", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,9,1 do
-                            for j=1,9,1 do 
+                            for j=1,9,1 do
                                 local name = minetest.get_node({x=pos.x+(j-5), y=pos.y+(i-9), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3709,8 +3704,8 @@ minetest.register_craftitem("tutorial:wallplacer5_5", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3753,7 +3748,7 @@ minetest.register_craftitem("tutorial:wallplacer5_5", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,11,1 do
-                            for j=1,11,1 do 
+                            for j=1,11,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-11), z=pos.z+(j-6)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3795,7 +3790,7 @@ minetest.register_craftitem("tutorial:wallplacer5_5", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,11,1 do
-                            for j=1,11,1 do 
+                            for j=1,11,1 do
                                 local name = minetest.get_node({x=pos.x+(j-6), y=pos.y+(i-11), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3824,8 +3819,8 @@ minetest.register_craftitem("tutorial:adminwallplacer_1", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3868,7 +3863,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-3), z=pos.z+(j-2)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3910,7 +3905,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_1", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,3,1 do
-                            for j=1,3,1 do 
+                            for j=1,3,1 do
                                 local name = minetest.get_node({x=pos.x+(j-2), y=pos.y+(i-3), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -3940,8 +3935,8 @@ minetest.register_craftitem("tutorial:adminwallplacer_2", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -3984,7 +3979,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-5), z=pos.z+(j-3)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -4026,7 +4021,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_2", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,5,1 do
-                            for j=1,5,1 do 
+                            for j=1,5,1 do
                                 local name = minetest.get_node({x=pos.x+(j-3), y=pos.y+(i-5), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -4056,8 +4051,8 @@ minetest.register_craftitem("tutorial:adminwallplacer_3", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -4100,7 +4095,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_3", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,7,1 do
-                            for j=1,7,1 do 
+                            for j=1,7,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-7), z=pos.z+(j-4)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -4142,7 +4137,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_3", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,7,1 do
-                            for j=1,7,1 do 
+                            for j=1,7,1 do
                                 local name = minetest.get_node({x=pos.x+(j-4), y=pos.y+(i-7), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -4172,8 +4167,8 @@ minetest.register_craftitem("tutorial:adminwallplacer_4", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -4216,7 +4211,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_4", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,9,1 do
-                            for j=1,9,1 do 
+                            for j=1,9,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-9), z=pos.z+(j-5)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -4258,7 +4253,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_4", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,9,1 do
-                            for j=1,9,1 do 
+                            for j=1,9,1 do
                                 local name = minetest.get_node({x=pos.x+(j-5), y=pos.y+(i-9), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -4288,8 +4283,8 @@ minetest.register_craftitem("tutorial:adminwallplacer_5", {
         if pointed_thing ~= nil then
             local dir=placer:get_look_dir()
             local di = 0
-	        if math.abs(dir.x)>math.abs(dir.z) then 
-		        if dir.x>0 then 
+	        if math.abs(dir.x)>math.abs(dir.z) then
+		        if dir.x>0 then
                     di = 0
                 else
                     di = 1
@@ -4332,7 +4327,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_5", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,11,1 do
-                            for j=1,11,1 do 
+                            for j=1,11,1 do
                                 local name = minetest.get_node({x=pos.x, y=pos.y+(i-11), z=pos.z+(j-6)}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -4374,7 +4369,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_5", {
                         end
                     elseif pos.y < pos2.y then
                         for i=1,11,1 do
-                            for j=1,11,1 do 
+                            for j=1,11,1 do
                                 local name = minetest.get_node({x=pos.x+(j-6), y=pos.y+(i-11), z=pos.z}).name
                                 if name == "air" or name == "default:water_source" or name == "default:water_flowing" or name == "default:river_water_source" or name == "default:river_water_flowing" or name == "default:lava_source" or name == "default:lava_flowing" or name == "technic:corium_flowing" then
                                     local count =  inv:get_stack("main", main):get_count()
@@ -5384,12 +5379,12 @@ xpi4.get_formspec = function(player, pos)
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
         .."list[detached:"..player:get_player_name().."_xpi5;xpi5;0,1.3;18,6]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi5;xpi5]"
         .."label[0,0.7;Yellow Level Blocks]"
         .."button[7,12;2,0.5;xpi3;<]"
         .."button[9,12;2,0.5;xpi5;>]"
-	return formspec		
+	return formspec
 end
 local xpi5 = {}
 xpi5.get_formspec = function(player, pos)
@@ -5428,17 +5423,17 @@ xpi5.get_formspec = function(player, pos)
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
         .."list[detached:"..player:get_player_name().."_xpi6;xpi6;0,1.3;18,6]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi6;xpi6]"
         .."label[0,0.7;Cyan Level Blocks]"
         .."button[7,12;2,0.5;xpi4;<]"
-	return formspec		
+	return formspec
 end
 minetest.register_node("tutorial:xp_block_yellow",{
 	description = "Xp Block (yellow)",
 	tiles  = {"tutorial_xp_block_yellow.png"},
     drop = '',
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xpy=1},  
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xpy=1},
 })
 for i = 0, 127 do
     local XTRAORES_TB = {
@@ -6126,7 +6121,7 @@ mine.get_formspec = function(player, pos)
         .."label[5,2.2;Green Coins]"
         .."list[current_player;main;1,4.25;8,1;]"
 	    .."list[current_player;main;1,5.5;8,3;8]"
-	return formspec		
+	return formspec
 end
 local recraft = {}
 recraft.get_formspec = function(player,pos)
@@ -6288,7 +6283,7 @@ recraft.get_formspec = function(player,pos)
             end
             if can ~= 1 then
                 if lv[re][1] > 115 and lv[re][1] ~= 122 and lv[re][1] ~= 123 then
-                    formspec = formspec 
+                    formspec = formspec
                     .."item_image_button[5,0;1,1;"..pr..""..(lv[re][1]-1)..";;]"
                     .."item_image_button[6,0;1,1;default:grass_1;zcg:default:grass_1;]"
                     .."item_image_button[7,0;1,1;default:grass_1;zcg:default:grass_1;]"
@@ -6307,7 +6302,7 @@ recraft.get_formspec = function(player,pos)
                     .."item_image_button[8,3;1,1;default:grass_1;zcg:default:grass_1;]"
                     .."item_image_button[11,1;1,1;"..pr..""..lv[re][1]..";;]"
                 elseif lv[re][1] == 123 then
-                    formspec = formspec 
+                    formspec = formspec
                     .."item_image_button[7,0;1,1;tutorial:regnum;zcg:tutorial:regnum;]"
                     .."item_image_button[7,1;1,1;tutorial:bottleSS;zcg:tutorial:bottleSS;]"
                     .."item_image_button[5,2;1,1;tutorial:regnum;zcg:tutorial:regnum;]"
@@ -6389,7 +6384,7 @@ recraft.get_formspec = function(player,pos)
                 if lv[re][13] ~= 0 then
                     formspec = formspec .."label[10.1.4,2.7i;"..lv[re][13].."s]"
                 end
-                
+
             end
         end
         formspec = formspec
@@ -6612,7 +6607,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         end
 		inventory_plus.set_inventory_formspec(player, crafting6.get_formspec(player))
 	end
-    if fields.trophcra then  
+    if fields.trophcra then
         local player_inv = player:get_inventory()
         player_inv:set_size("trophcr", 1)
         player_inv:set_size("tearred", 1)
@@ -6648,7 +6643,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         end
 		inventory_plus.set_inventory_formspec(player, troph.get_formspec(player))
 	end
-	if fields.backwardcra then  
+	if fields.backwardcra then
         local player_inv = player:get_inventory()
         player_inv:set_size("backward", 1)
 		local name = player_inv:get_stack("backward", 1):get_name()
@@ -6819,7 +6814,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		minetest.after(time, function()
 			if player == nil then
 				return
-			end	
+			end
 			local player_inv = player:get_inventory()
 			if crafting8.get_formspec(player) == (player:get_inventory_formspec()) then
 				inventory_plus.set_inventory_formspec(player, crafting8.get_formspec(player))
