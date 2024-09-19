@@ -1898,7 +1898,7 @@ minetest.register_craft({
 })
 minetest.register_craft({
     output = 'tutorial:cloudentverner21',
-    recipe = { 
+    recipe = {
 		{'tutorial:megablock4','tutorial:megablock4', 'tutorial:megablock4'},
 		{'tutorial:megablock4','tutorial:cloudentverner20', 'tutorial:megablock4'},
 		{'tutorial:megablock4','tutorial:megablock4', 'tutorial:megablock4'},
@@ -2273,7 +2273,7 @@ minetest.register_craft({
     }
 })
 minetest.register_craft({
-    output = '"tutorial:battleaxe_mega4"',
+    output = 'tutorial:battleaxe_mega4',
     recipe = {
         {'tutorial:obsidian6', 'tutorial:obsidian6', 'tutorial:obsidian6'},
         {'tutorial:obsidian6','tutorial:battleaxe_mega3','tutorial:obsidian6'},
@@ -2293,14 +2293,14 @@ minetest.register_craft({
 	recipe = {
 		{'default:obsidian','default:obsidian','default:obsidian'},
 		{'default:obsidian','','default:ice'},
-	        {'default:obsidian','default:obsidian','default:obsidian'},		
+	        {'default:obsidian','default:obsidian','default:obsidian'},
 	}
-})		
+})
 minetest.register_craft({
 	output = 'tutorial:heli',
 	recipe = {
 		{'', 'tutorial:blades'},
-		{'tutorial:blades', 'tutorial:cabin'},	
+		{'tutorial:blades', 'tutorial:cabin'},
 	}
 })
 minetest.register_craft({

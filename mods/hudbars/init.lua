@@ -194,7 +194,7 @@ function hb.register_hudbar(identifier, text_color, label, textures, default_sta
 		end
 		if hb.settings.bar_type == "progress_bar" then
 			ids.bg = player:hud_add({
-				hud_elem_type = "image",
+				type = "image",
 				position = pos,
 				scale = bgscale,
 				text = "hudbars_bar_background.png",
@@ -204,7 +204,7 @@ function hb.register_hudbar(identifier, text_color, label, textures, default_sta
 			})
 			if textures.icon ~= nil then
 				ids.icon = player:hud_add({
-					hud_elem_type = "image",
+					type = "image",
 					position = pos,
 					scale = iconscale,
 					text = textures.icon,
@@ -234,7 +234,7 @@ function hb.register_hudbar(identifier, text_color, label, textures, default_sta
 			text2 = bgicon
 		end
 		ids.bar = player:hud_add({
-			hud_elem_type = "statbar",
+			type = "statbar",
 			position = pos,
 			text = bar_image,
 			text2 = text2,
@@ -248,7 +248,7 @@ function hb.register_hudbar(identifier, text_color, label, textures, default_sta
 		})
 		if hb.settings.bar_type == "progress_bar" then
 			ids.text = player:hud_add({
-				hud_elem_type = "text",
+				type = "text",
 				position = pos,
 				text = text,
 				alignment = {x=1,y=1},
@@ -293,7 +293,7 @@ function hb.register_hudbar(identifier, text_color, label, textures, default_sta
 	hudtable.default_start_max = default_start_max
 
 	hb.hudbars_count= hb.hudbars_count + 1
-	
+
 	hb.hudtables[identifier] = hudtable
 end
 
@@ -515,7 +515,7 @@ local function update_hud(player)
 		--air
 		local breath_max = player:get_properties().breath_max
 		local breath = player:get_breath()
-		
+
 		if breath >= breath_max and hb.settings.autohide_breath == true then
 			hb.hide_hudbar(player, "breath")
 		else

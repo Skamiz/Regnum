@@ -1,7 +1,7 @@
 minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
 	player:hud_add({
-		hud_elem_type = "text",
+		type = "text",
 		position = {x=0, y=0.85},
 		offset = {x=0, y=10},
 		alignment = {x=1, y=0},
@@ -9,7 +9,7 @@ minetest.register_on_joinplayer(function(player)
 		text = "For Minetest 	  :  5.6.x",
 	})
 	player:hud_add({
-		hud_elem_type = "text",
+		type = "text",
 		position = {x=0, y=0.85},
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
